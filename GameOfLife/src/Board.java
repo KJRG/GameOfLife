@@ -11,7 +11,15 @@ public class Board {
 
 	public Board(int size, List<Cell> aliveCells) {
 		this.size = size;
-		this.currentRound = new ArrayList<Cell>(aliveCells);
+		this.currentRound = new ArrayList<Cell>();
+		
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				Cell c = new Cell(i, j);
+				c.setAlive(false);
+				currentRound.add(c);
+			}
+		}
 	}
 
 	private int getNumAliveNeighbours(Cell c) {

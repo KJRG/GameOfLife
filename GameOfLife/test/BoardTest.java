@@ -51,8 +51,8 @@ public class BoardTest {
 
 	@Test
 	public void cellStaysAliveWhenItHas2Neighbours() {
-		List<Cell> aliveCells = Arrays.asList((new Cell(0, 1)), new Cell(1, 0),
-				new Cell(1, 1));
+		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)), new Cell(0, 1),
+				new Cell(1, 0));
 		Board board = new Board(3, aliveCells);
 		boolean alive = false;
 
@@ -73,39 +73,91 @@ public class BoardTest {
 
 	@Test
 	public void cellStaysDeadWhenItHas2Neighbours() {
-		List<Cell> aliveCells = Arrays.asList((new Cell(0, 1)), new Cell(1, 0),
-				new Cell(1, 1), new Cell(2, 1));
+		List<Cell> aliveCells = Arrays.asList((new Cell(1, 0)), new Cell(2, 0));
 		Board board = new Board(3, aliveCells);
 		boolean alive = false;
-		
+
 		board.nextRound();
-		
+
 		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 0 && c.getPosY() == 2) {
+			if (c.getPosX() == 1 && c.getPosY() == 1) {
 				if (c.isAlive()) {
 					alive = true;
 				}
-				
+
 				break;
 			}
 		}
-		
+
 		assertFalse(alive);
 	}
 
 	@Test
 	public void cellStaysAliveWhenItHas3Neighbours() {
-		fail("Not yet implemented");
+		List<Cell> aliveCells = Arrays.asList((new Cell(0, 1)), new Cell(1, 0),
+				new Cell(1, 1), new Cell(2, 1));
+		Board board = new Board(3, aliveCells);
+		boolean alive = false;
+
+		board.nextRound();
+
+		for (Cell c : board.getCells()) {
+			if (c.getPosX() == 1 && c.getPosY() == 1) {
+				if (c.isAlive()) {
+					alive = true;
+				}
+
+				break;
+			}
+		}
+
+		assertTrue(alive);
 	}
 
 	@Test
 	public void cellBecomesAliveWhenItHas3Neighbours() {
-		fail("Not yet implemented");
+		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)), new Cell(0, 1),
+				new Cell(0, 2));
+		Board board = new Board(3, aliveCells);
+		boolean alive = false;
+
+		board.nextRound();
+
+		for (Cell c : board.getCells()) {
+			if (c.getPosX() == 1 && c.getPosY() == 1) {
+				if (c.isAlive()) {
+					alive = true;
+				}
+
+				break;
+			}
+		}
+
+		assertTrue(alive);
 	}
 
 	@Test
 	public void cellDiesWhenItHasMoreThan3Neighbours() {
-		fail("Not yet implemented");
+		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)), new Cell(0, 1),
+				new Cell(0, 2), (new Cell(1, 0)), new Cell(1, 1),
+				new Cell(1, 2), (new Cell(2, 0)), new Cell(2, 1),
+				new Cell(2, 2));
+		Board board = new Board(3, aliveCells);
+		boolean alive = false;
+
+		board.nextRound();
+
+		for (Cell c : board.getCells()) {
+			if (c.getPosX() == 1 && c.getPosY() == 1) {
+				if (c.isAlive()) {
+					alive = true;
+				}
+
+				break;
+			}
+		}
+
+		assertFalse(alive);
 	}
 
 }
