@@ -12,11 +12,20 @@ public class Board {
 	public Board(int size, List<Cell> aliveCells) {
 		this.size = size;
 		this.currentRound = new ArrayList<Cell>();
-		
-		for(int i = 0; i < size; i++) {
-			for(int j = 0; j < size; j++) {
+
+		int posOnList = 0;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
 				Cell c = new Cell(i, j);
 				c.setAlive(false);
+
+				if (posOnList < aliveCells.size() && i == aliveCells.get(posOnList).getPosX()
+						&& j == aliveCells.get(posOnList).getPosY()) {
+					
+					c.setAlive(true);
+					posOnList++;
+				}
+				
 				currentRound.add(c);
 			}
 		}
@@ -38,8 +47,9 @@ public class Board {
 			numAliveNeighbours = getNumAliveNeighbours(currentRound.get(i));
 
 			if (numAliveNeighbours < 2 || numAliveNeighbours > 3
-					|| (numAliveNeighbours == 2 && !currentRound.get(i).isAlive())) {
-				
+					|| (numAliveNeighbours == 2
+							&& !currentRound.get(i).isAlive())) {
+
 				nextRound.get(i).setAlive(false);
 				continue;
 			}
