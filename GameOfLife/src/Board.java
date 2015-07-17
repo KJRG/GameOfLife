@@ -75,8 +75,4 @@ public class Board {
 
 		currentRound = nextRound;
 	}
-
-	public List<Cell> getCurrentRound() {
-		return currentRound;
-	}
 }
