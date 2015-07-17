@@ -14,18 +14,19 @@ public class Board {
 		this.currentRound = new ArrayList<Cell>();
 
 		int posOnList = 0;
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < this.size; i++) {
+			for (int j = 0; j < this.size; j++) {
 				Cell c = new Cell(i, j);
 				c.setAlive(false);
 
-				if (posOnList < aliveCells.size() && i == aliveCells.get(posOnList).getPosX()
+				if (posOnList < aliveCells.size()
+						&& i == aliveCells.get(posOnList).getPosX()
 						&& j == aliveCells.get(posOnList).getPosY()) {
-					
+
 					c.setAlive(true);
 					posOnList++;
 				}
-				
+
 				currentRound.add(c);
 			}
 		}
@@ -34,13 +35,28 @@ public class Board {
 	private int getNumAliveNeighbours(Cell c) {
 		int numAliveNeighbours = 0;
 
-		List<Cell> neighbours = new ArrayList<Cell>();
-
+		for (Cell n : currentRound) {
+			
+			if (Math.abs(c.getPosX() - n.getPosX()) <= 1
+					&& Math.abs(c.getPosY() - n.getPosY()) <= 1) {
+				if(n.isAlive()) {
+					numAliveNeighbours++;
+				}
+			}
+		}
+		if(c.isAlive()) {
+			numAliveNeighbours--;
+		}
+		
 		return numAliveNeighbours;
 	}
 
 	public void nextRound() {
-		List<Cell> nextRound = new ArrayList<Cell>(currentRound);
+		List<Cell> nextRound = new ArrayList<Cell>();
+		for(Cell c : currentRound) {
+			nextRound.add(new Cell(c));
+		}
+		
 		int numAliveNeighbours = 0;
 
 		for (int i = 0; i < nextRound.size(); i++) {

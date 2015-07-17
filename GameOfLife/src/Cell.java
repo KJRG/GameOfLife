@@ -1,13 +1,16 @@
-import java.util.List;
-
 public class Cell {
 	private int posX, posY;
 	private boolean alive;
-	private List<Cell> neighbours;
 
 	public Cell(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
+	}
+
+	public Cell(Cell other) {
+		this.posX = other.posX;
+		this.posY = other.posY;
+		this.alive = other.alive;
 	}
 
 	public int getPosX() {
