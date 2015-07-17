@@ -36,27 +36,27 @@ public class Board {
 		int numAliveNeighbours = 0;
 
 		for (Cell n : currentRound) {
-			
+
 			if (Math.abs(c.getPosX() - n.getPosX()) <= 1
 					&& Math.abs(c.getPosY() - n.getPosY()) <= 1) {
-				if(n.isAlive()) {
+				if (n.isAlive()) {
 					numAliveNeighbours++;
 				}
 			}
 		}
-		if(c.isAlive()) {
+		if (c.isAlive()) {
 			numAliveNeighbours--;
 		}
-		
+
 		return numAliveNeighbours;
 	}
 
 	public void nextRound() {
 		List<Cell> nextRound = new ArrayList<Cell>();
-		for(Cell c : currentRound) {
+		for (Cell c : currentRound) {
 			nextRound.add(new Cell(c));
 		}
-		
+
 		int numAliveNeighbours = 0;
 
 		for (int i = 0; i < nextRound.size(); i++) {
