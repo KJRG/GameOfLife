@@ -13,6 +13,7 @@ public class Display implements ActionListener {
 	JButton buttonStart,
 			buttonStop,
 			buttonNextRound;
+	Grid grid;
 	
 	private Board board;
 
@@ -23,14 +24,14 @@ public class Display implements ActionListener {
 		cells.add(new Cell(0, 0));
 		cells.add(new Cell(0, 1));
 		cells.add(new Cell(1, 0));
-//		board = new Board(3, cells);
+		board = new Board(3, 3, cells);
 		
 		prepareGUI();
 	}
 
 	public void prepareGUI() {
 		mainFrame = new JFrame("Game of life");
-		mainFrame.setSize(500, 300);
+		mainFrame.setSize(500, 350);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		buttonStart = new JButton("Start");
@@ -47,7 +48,7 @@ public class Display implements ActionListener {
 		controlPanel.add(buttonStop);
 		controlPanel.add(buttonNextRound);
 
-		Grid grid = new Grid();
+		grid = new Grid();
 
 		mainFrame.add(grid, BorderLayout.CENTER);
 		mainFrame.add(controlPanel, BorderLayout.EAST);
@@ -61,6 +62,9 @@ public class Display implements ActionListener {
 		if(ae.getSource() == this.buttonNextRound) {
 			board.nextRound();
 			
+			grid.setBoard(board.getCurrentRound());
+			
+			grid.repaint();
 		}
 	}
 
