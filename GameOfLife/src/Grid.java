@@ -49,11 +49,7 @@ public class Grid extends JPanel {
 				
 				g.setColor(Color.BLACK);
 				g.drawRect((100 * i), (100 * j), 100, 100);			
-//				JOptionPane.showMessageDialog(null, "x: " + i + " y: " + j);
 			}
 		}
-
-//		g.setColor(Color.BLUE);
-//		g.fillRect(10, 10, 10, 10);
 	}
 }
