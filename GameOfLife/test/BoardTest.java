@@ -10,19 +10,13 @@ public class BoardTest {
 	@Test
 	public void cellDiesWhenItHasNoNeighbours() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 0 && c.getPosY() == 0) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(0, 0)).isAlive()) {
+			alive = true;
 		}
 
 		assertFalse(alive);
@@ -31,19 +25,13 @@ public class BoardTest {
 	@Test
 	public void cellDiesWhenItHasOneNeighbour() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)), new Cell(1, 0));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 0 && c.getPosY() == 0) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(0, 0)).isAlive()) {
+			alive = true;
 		}
 
 		assertFalse(alive);
@@ -53,19 +41,13 @@ public class BoardTest {
 	public void cellStaysAliveWhenItHas2Neighbours() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)), new Cell(0, 1),
 				new Cell(1, 0));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 0 && c.getPosY() == 0) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(0, 0)).isAlive()) {
+			alive = true;
 		}
 
 		assertTrue(alive);
@@ -74,19 +56,13 @@ public class BoardTest {
 	@Test
 	public void cellStaysDeadWhenItHas2Neighbours() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(1, 0)), new Cell(2, 0));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 1 && c.getPosY() == 1) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(1, 1)).isAlive()) {
+			alive = true;
 		}
 
 		assertFalse(alive);
@@ -96,19 +72,13 @@ public class BoardTest {
 	public void cellStaysAliveWhenItHas3Neighbours() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(0, 1)), new Cell(1, 0),
 				new Cell(1, 1), new Cell(2, 1));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 1 && c.getPosY() == 1) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(1, 1)).isAlive()) {
+			alive = true;
 		}
 
 		assertTrue(alive);
@@ -118,19 +88,13 @@ public class BoardTest {
 	public void cellBecomesAliveWhenItHas3Neighbours() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)), new Cell(0, 1),
 				new Cell(0, 2));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 1 && c.getPosY() == 1) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(1, 1)).isAlive()) {
+			alive = true;
 		}
 
 		assertTrue(alive);
@@ -142,19 +106,13 @@ public class BoardTest {
 				new Cell(0, 2), (new Cell(1, 0)), new Cell(1, 1),
 				new Cell(1, 2), (new Cell(2, 0)), new Cell(2, 1),
 				new Cell(2, 2));
-		Board board = new Board(3, aliveCells);
+		Board board = new Board(3, 3, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
 
-		for (Cell c : board.getCells()) {
-			if (c.getPosX() == 1 && c.getPosY() == 1) {
-				if (c.isAlive()) {
-					alive = true;
-				}
-
-				break;
-			}
+		if (board.getCurrentRound().get(new Position(1, 1)).isAlive()) {
+			alive = true;
 		}
 
 		assertFalse(alive);
