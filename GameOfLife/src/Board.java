@@ -7,6 +7,14 @@ public class Board {
 	private int rows, columns;
 	private Map<Position, Cell> currentRoundBoard;
 
+	public int getRows() {
+		return rows;
+	}
+
+	public int getColumns() {
+		return columns;
+	}
+
 	public Map<Position, Cell> getCurrentRound() {
 		return this.currentRoundBoard;
 	}
