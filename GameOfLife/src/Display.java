@@ -23,7 +23,7 @@ public class Display implements ActionListener {
 		cells.add(new Cell(0, 0));
 		cells.add(new Cell(0, 1));
 		cells.add(new Cell(1, 0));
-		board = new Board(3, cells);
+//		board = new Board(3, cells);
 		
 		prepareGUI();
 	}
