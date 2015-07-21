@@ -83,6 +83,14 @@ public class Board {
 		
 		this.currentRoundBoard.put(cell.getPosition(), cell);
 	}
+	
+	public void clear() {
+		for(Position position : this.currentRoundBoard.keySet()) {
+			Cell cell = this.currentRoundBoard.get(position);
+			cell.setAlive(false);
+			this.currentRoundBoard.put(cell.getPosition(), cell);
+		}
+	}
 
 	public void nextRound() {
 		int numAliveNeighbours = 0;

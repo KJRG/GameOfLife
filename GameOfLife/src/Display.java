@@ -12,7 +12,8 @@ public class Display implements ActionListener, MouseListener {
 	private JPanel buttonsPanel;
 	private JButton buttonStart,
 			buttonStop,
-			buttonNextRound;
+			buttonNextRound,
+			buttonClearBoard;
 	private GridPanel grid;
 
 	private Board board;
@@ -33,6 +34,7 @@ public class Display implements ActionListener, MouseListener {
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
 		buttonNextRound = new JButton("Next round");
+		buttonClearBoard = new JButton("Clear");
 
 		buttonStart.setMaximumSize(new Dimension(Integer.MAX_VALUE,
 				buttonStart.getMinimumSize().height));
@@ -40,10 +42,13 @@ public class Display implements ActionListener, MouseListener {
 				buttonStop.getMinimumSize().height));
 		buttonNextRound.setMaximumSize(new Dimension(Integer.MAX_VALUE,
 				buttonNextRound.getMinimumSize().height));
+		buttonClearBoard.setMaximumSize(new Dimension(Integer.MAX_VALUE,
+				buttonClearBoard.getMinimumSize().height));
 
 		buttonStart.addActionListener(this);
 		buttonStop.addActionListener(this);
 		buttonNextRound.addActionListener(this);
+		buttonClearBoard.addActionListener(this);
 
 		grid = new GridPanel();
 		grid.setBoard(this.board.getCurrentRound());
@@ -57,6 +62,8 @@ public class Display implements ActionListener, MouseListener {
 		buttonsPanel.add(buttonStop);
 		buttonsPanel.add(Box.createVerticalStrut(2));
 		buttonsPanel.add(buttonNextRound);
+		buttonsPanel.add(Box.createVerticalStrut(2));
+		buttonsPanel.add(buttonClearBoard);
 
 		mainFrame.add(grid, BorderLayout.CENTER);
 		mainFrame.add(buttonsPanel, BorderLayout.EAST);
@@ -101,6 +108,11 @@ public class Display implements ActionListener, MouseListener {
 		if (ae.getSource() == this.buttonNextRound && !animate) {
 			board.nextRound();
 			grid.setBoard(board.getCurrentRound());
+			grid.repaint();
+		}
+		
+		if(ae.getSource() == this.buttonClearBoard && !animate) {
+			board.clear();
 			grid.repaint();
 		}
 	}
