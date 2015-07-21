@@ -123,7 +123,7 @@ public class Display implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(animate) {
+		if(animate || e.getButton() != MouseEvent.BUTTON1) {
 			return;
 		}
 		
