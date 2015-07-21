@@ -26,34 +26,34 @@ public class Board {
 		
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
-				Cell c = new Cell(i, j);
-				currentRoundBoard.put(c.getPosition(), c);
+				Cell cell = new Cell(i, j);
+				currentRoundBoard.put(cell.getPosition(), cell);
 			}
 		}
 
-		for (Cell c : aliveCells) {
-			Position posAlive = new Position(c.getX(), c.getY());
+		for (Cell cell : aliveCells) {
+			Position posAlive = new Position(cell.getX(), cell.getY());
 			Cell aliveCell = currentRoundBoard.get(posAlive);
 			aliveCell.setAlive(true);
 			currentRoundBoard.put(aliveCell.getPosition(), aliveCell);
 		}
 	}
 
-	private List<Position> getNeighbours(Position pos) {
+	private List<Position> getNeighbours(Position position) {
 		List<Position> neighbours = new ArrayList<Position>();
 
-		int minLeft = pos.getX() == 0 ? 0 : pos.getX() - 1;
-		int maxRight = pos.getX() == (numOfRows - 1)
+		int minLeft = position.getX() == 0 ? 0 : position.getX() - 1;
+		int maxRight = position.getX() == (numOfRows - 1)
 				? (numOfRows - 1)
-				: pos.getX() + 1;
-		int minUp = pos.getY() == 0 ? 0 : pos.getY() - 1;
-		int maxDown = pos.getY() == (numOfColumns - 1)
+				: position.getX() + 1;
+		int minUp = position.getY() == 0 ? 0 : position.getY() - 1;
+		int maxDown = position.getY() == (numOfColumns - 1)
 				? (numOfColumns - 1)
-				: pos.getY() + 1;
+				: position.getY() + 1;
 
 		for (int i = minLeft; i <= maxRight; i++) {
 			for (int j = minUp; j <= maxDown; j++) {
-				if (i == pos.getX() && j == pos.getY()) {
+				if (i == position.getX() && j == position.getY()) {
 					continue;
 				}
 
@@ -64,11 +64,11 @@ public class Board {
 		return neighbours;
 	}
 
-	private int getNumAliveNeighbours(Position pos) {
+	private int getNumAliveNeighbours(Position position) {
 		int numAliveNeighbours = 0;
 
-		for (Position p : getNeighbours(pos)) {
-			if (currentRoundBoard.get(p).isAlive()) {
+		for (Position neighbour : getNeighbours(position)) {
+			if (currentRoundBoard.get(neighbour).isAlive()) {
 				numAliveNeighbours++;
 			}
 		}
@@ -80,21 +80,21 @@ public class Board {
 		int numAliveNeighbours = 0;
 		Map<Position, Cell> nextRoundBoard = new HashMap<Position, Cell>();
 		
-		for (Position pos : currentRoundBoard.keySet()) {
-			Cell c = new Cell(currentRoundBoard.get(pos));
-			numAliveNeighbours = getNumAliveNeighbours(pos);
+		for (Position position : currentRoundBoard.keySet()) {
+			Cell cell = new Cell(currentRoundBoard.get(position));
+			numAliveNeighbours = getNumAliveNeighbours(position);
 
 			if (numAliveNeighbours < 2 || numAliveNeighbours > 3
 					|| (numAliveNeighbours == 2
-							&& !c.isAlive())) {
+							&& !cell.isAlive())) {
 
-				c.setAlive(false);
-				nextRoundBoard.put(c.getPosition(), c);
+				cell.setAlive(false);
+				nextRoundBoard.put(cell.getPosition(), cell);
 				continue;
 			}
 
-			c.setAlive(true);
-			nextRoundBoard.put(c.getPosition(), c);
+			cell.setAlive(true);
+			nextRoundBoard.put(cell.getPosition(), cell);
 		}
 
 		currentRoundBoard = nextRoundBoard;
