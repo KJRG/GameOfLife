@@ -16,7 +16,9 @@ public class DisplayTest {
 		cells.add(new Cell(0, 1));
 		cells.add(new Cell(1, 0));
 		
-		Display d = new Display(cells);
+		Board board = new Board(30, 30, cells);
+		
+		Display d = new Display(board);
 		d.prepareGUI();
 		d.show();
 	}

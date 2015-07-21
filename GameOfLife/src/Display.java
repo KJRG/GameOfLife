@@ -18,9 +18,9 @@ public class Display implements ActionListener {
 	private boolean animate;
 	private Thread animatorThread;
 
-	public Display(List<Cell> cells) {
+	public Display(Board board) {
+		this.board = board;
 		animate = false;
-		board = new Board(30, 30, cells);
 		prepareGUI();
 	}
 
