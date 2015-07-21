@@ -31,11 +31,29 @@ public class Display implements ActionListener {
 		cells.add(new Cell(23, 23));
 		cells.add(new Cell(23, 24));
 		cells.add(new Cell(24, 23));
+		
+		// beehive
+		cells.add(new Cell(2, 15));
+		cells.add(new Cell(3, 14));
+		cells.add(new Cell(3, 16));
+		cells.add(new Cell(4, 14));
+		cells.add(new Cell(4, 16));
+		cells.add(new Cell(5, 15));
 
 		// blinker
 		cells.add(new Cell(4, 5));
 		cells.add(new Cell(5, 5));
 		cells.add(new Cell(6, 5));
+		
+		// beacon
+		cells.add(new Cell(17, 1));
+		cells.add(new Cell(17, 2));
+		cells.add(new Cell(18, 1));
+		cells.add(new Cell(18, 2));
+		cells.add(new Cell(19, 3));
+		cells.add(new Cell(19, 4));
+		cells.add(new Cell(20, 3));
+		cells.add(new Cell(20, 4));
 		
 		// glider
 		cells.add(new Cell(10, 10));
