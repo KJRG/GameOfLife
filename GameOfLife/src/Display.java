@@ -16,64 +16,12 @@ public class Display implements ActionListener {
 	private GridPanel grid;
 
 	private Board board;
-	private boolean loop;
+	private boolean animate;
 	private Thread animatorThread;
 
-	public Display() {
-		// TODO Move different figures to enum
-
-		List<Cell> cells = new ArrayList<Cell>();
-		loop = false;
-
-		// brick
-		cells.add(new Cell(0, 0));
-		cells.add(new Cell(0, 1));
-		cells.add(new Cell(1, 0));
-
-		// brick
-		cells.add(new Cell(23, 23));
-		cells.add(new Cell(23, 24));
-		cells.add(new Cell(24, 23));
-
-		// beehive
-		cells.add(new Cell(2, 15));
-		cells.add(new Cell(3, 14));
-		cells.add(new Cell(3, 16));
-		cells.add(new Cell(4, 14));
-		cells.add(new Cell(4, 16));
-		cells.add(new Cell(5, 15));
-
-		// blinker
-		cells.add(new Cell(4, 5));
-		cells.add(new Cell(5, 5));
-		cells.add(new Cell(6, 5));
-
-		// beacon
-		cells.add(new Cell(17, 1));
-		cells.add(new Cell(17, 2));
-		cells.add(new Cell(18, 1));
-		cells.add(new Cell(18, 2));
-		cells.add(new Cell(19, 3));
-		cells.add(new Cell(19, 4));
-		cells.add(new Cell(20, 3));
-		cells.add(new Cell(20, 4));
-
-		// glider
-		cells.add(new Cell(10, 10));
-		cells.add(new Cell(11, 11));
-		cells.add(new Cell(12, 11));
-		cells.add(new Cell(10, 12));
-		cells.add(new Cell(11, 12));
-		
-		// R-pentomino
-		cells.add(new Cell(4, 22));
-		cells.add(new Cell(5, 21));
-		cells.add(new Cell(5, 22));
-		cells.add(new Cell(5, 23));
-		cells.add(new Cell(6, 21));
-
+	public Display(List<Cell> cells) {
+		animate = false;
 		board = new Board(30, 30, cells);
-
 		prepareGUI();
 	}
 
@@ -113,7 +61,7 @@ public class Display implements ActionListener {
 		mainFrame.add(buttonsPanel, BorderLayout.EAST);
 	}
 
-	private void show() {
+	public void show() {
 		mainFrame.setVisible(true);
 	}
 
@@ -122,7 +70,7 @@ public class Display implements ActionListener {
 		@Override
 		public void run() {
 
-			while (loop) {
+			while (animate) {
 				board.nextRound();
 				grid.setBoard(board.getCurrentRound());
 				grid.repaint();
@@ -132,26 +80,24 @@ public class Display implements ActionListener {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
 			}
 		}
-
 	};
 
 	public void actionPerformed(ActionEvent ae) {
 
-		if (ae.getSource() == this.buttonStart && !loop) {
-			loop = true;
+		if (ae.getSource() == this.buttonStart && !animate) {
+			animate = true;
 			animatorThread = new Thread(animator);
 			animatorThread.start();
 		}
 
-		if (ae.getSource() == this.buttonStop && loop) {
-			loop = false;
+		if (ae.getSource() == this.buttonStop && animate) {
+			animate = false;
 			animatorThread = null;
 		}
 
-		if (ae.getSource() == this.buttonNextRound && !loop) {
+		if (ae.getSource() == this.buttonNextRound && !animate) {
 			board.nextRound();
 			grid.setBoard(board.getCurrentRound());
 			grid.repaint();
@@ -159,7 +105,56 @@ public class Display implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		Display d = new Display();
+		List<Cell> cells = new ArrayList<Cell>();
+		
+		// brick
+		cells.add(new Cell(0, 0));
+		cells.add(new Cell(0, 1));
+		cells.add(new Cell(1, 0));
+		
+		// brick
+		cells.add(new Cell(23, 23));
+		cells.add(new Cell(23, 24));
+		cells.add(new Cell(24, 23));
+		
+		// beehive
+		cells.add(new Cell(2, 15));
+		cells.add(new Cell(3, 14));
+		cells.add(new Cell(3, 16));
+		cells.add(new Cell(4, 14));
+		cells.add(new Cell(4, 16));
+		cells.add(new Cell(5, 15));
+		
+		// blinker
+		cells.add(new Cell(4, 5));
+		cells.add(new Cell(5, 5));
+		cells.add(new Cell(6, 5));
+		
+		// beacon
+		cells.add(new Cell(17, 1));
+		cells.add(new Cell(17, 2));
+		cells.add(new Cell(18, 1));
+		cells.add(new Cell(18, 2));
+		cells.add(new Cell(19, 3));
+		cells.add(new Cell(19, 4));
+		cells.add(new Cell(20, 3));
+		cells.add(new Cell(20, 4));
+		
+		// glider
+		cells.add(new Cell(10, 10));
+		cells.add(new Cell(11, 11));
+		cells.add(new Cell(12, 11));
+		cells.add(new Cell(10, 12));
+		cells.add(new Cell(11, 12));
+		
+		// R-pentomino
+		cells.add(new Cell(4, 22));
+		cells.add(new Cell(5, 21));
+		cells.add(new Cell(5, 22));
+		cells.add(new Cell(5, 23));
+		cells.add(new Cell(6, 21));
+		
+		Display d = new Display(cells);
 		d.show();
 	}
 }
