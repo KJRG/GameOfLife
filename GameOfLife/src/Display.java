@@ -64,6 +64,13 @@ public class Display implements ActionListener {
 		cells.add(new Cell(12, 11));
 		cells.add(new Cell(10, 12));
 		cells.add(new Cell(11, 12));
+		
+		// R-pentomino
+		cells.add(new Cell(4, 22));
+		cells.add(new Cell(5, 21));
+		cells.add(new Cell(5, 22));
+		cells.add(new Cell(5, 23));
+		cells.add(new Cell(6, 21));
 
 		board = new Board(30, 30, cells);
 
