@@ -4,15 +4,15 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Board {
-	private int rows, columns;
+	private int numOfRows, numOfColumns;
 	private Map<Position, Cell> currentRoundBoard;
 
 	public int getRows() {
-		return rows;
+		return numOfRows;
 	}
 
 	public int getColumns() {
-		return columns;
+		return numOfColumns;
 	}
 
 	public Map<Position, Cell> getCurrentRound() {
@@ -20,12 +20,12 @@ public class Board {
 	}
 
 	public Board(int rows, int columns, List<Cell> aliveCells) {
-		this.rows = rows;
-		this.columns = columns;
+		this.numOfRows = rows;
+		this.numOfColumns = columns;
 		this.currentRoundBoard = new HashMap<Position, Cell>();
 
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < columns; j++) {
+		for (int i = 0; i < columns; i++) {
+			for (int j = 0; j < rows; j++) {
 				currentRoundBoard.put(new Position(i, j), new Cell(i, j));
 			}
 		}
@@ -42,10 +42,10 @@ public class Board {
 		List<Position> neighbours = new ArrayList<Position>();
 
 		int minLeft = pos.getX() == 0 ? 0 : pos.getX() - 1;
-		int maxRight = pos.getX() == (rows - 1) ? (rows - 1) : pos.getX() + 1;
+		int maxRight = pos.getX() == (numOfRows - 1) ? (numOfRows - 1) : pos.getX() + 1;
 		int minUp = pos.getY() == 0 ? 0 : pos.getY() - 1;
-		int maxDown = pos.getY() == (columns - 1)
-				? (columns - 1)
+		int maxDown = pos.getY() == (numOfColumns - 1)
+				? (numOfColumns - 1)
 				: pos.getY() + 1;
 
 		for (int i = minLeft; i <= maxRight; i++) {
