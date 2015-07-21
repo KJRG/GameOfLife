@@ -23,7 +23,7 @@ public class Board {
 		this.numOfRows = rows;
 		this.numOfColumns = columns;
 		this.currentRoundBoard = new HashMap<Position, Cell>();
-		
+
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
 				Cell cell = new Cell(i, j);
@@ -32,7 +32,7 @@ public class Board {
 		}
 
 		for (Cell cell : aliveCells) {
-			Position posAlive = new Position(cell.getX(), cell.getY());
+			Position posAlive = new Position(cell.getPosition());
 			Cell aliveCell = currentRoundBoard.get(posAlive);
 			aliveCell.setAlive(true);
 			currentRoundBoard.put(aliveCell.getPosition(), aliveCell);
@@ -64,10 +64,10 @@ public class Board {
 		return neighbours;
 	}
 
-	private int getNumAliveNeighbours(Position position) {
+	private int getNumAliveNeighbours(Cell cell) {
 		int numAliveNeighbours = 0;
 
-		for (Position neighbour : getNeighbours(position)) {
+		for (Position neighbour : getNeighbours(cell.getPosition())) {
 			if (currentRoundBoard.get(neighbour).isAlive()) {
 				numAliveNeighbours++;
 			}
@@ -79,10 +79,10 @@ public class Board {
 	public void nextRound() {
 		int numAliveNeighbours = 0;
 		Map<Position, Cell> nextRoundBoard = new HashMap<Position, Cell>();
-		
+
 		for (Position position : currentRoundBoard.keySet()) {
 			Cell cell = new Cell(currentRoundBoard.get(position));
-			numAliveNeighbours = getNumAliveNeighbours(position);
+			numAliveNeighbours = getNumAliveNeighbours(cell);
 
 			if (numAliveNeighbours < 2 || numAliveNeighbours > 3
 					|| (numAliveNeighbours == 2
