@@ -1,32 +1,30 @@
 public class Cell {
-	private int posX, posY;
+	private Position position;
 	private boolean alive;
 
-	public Cell(int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
+	public Cell(int x, int y) {
+		this.position = new Position(x, y);
 	}
 
 	public Cell(Cell other) {
-		this.posX = other.posX;
-		this.posY = other.posY;
+		this.position = new Position(other.getX(), other.getY());
 		this.alive = other.alive;
 	}
 
-	public int getPosX() {
-		return posX;
+	public int getX() {
+		return position.getX();
 	}
 
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public void setX(int x) {
+		position.setX(x);
 	}
 
-	public int getPosY() {
-		return posY;
+	public int getY() {
+		return position.getY();
 	}
 
-	public void setPosY(int posY) {
-		this.posY = posY;
+	public void setY(int y) {
+		position.setY(y);
 	}
 
 	public boolean isAlive() {

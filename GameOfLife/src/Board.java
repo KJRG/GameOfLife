@@ -31,7 +31,7 @@ public class Board {
 		}
 
 		for (Cell c : aliveCells) {
-			Position posAlive = new Position(c.getPosX(), c.getPosY());
+			Position posAlive = new Position(c.getX(), c.getY());
 			Cell aliveCell = currentRoundBoard.get(posAlive);
 			aliveCell.setAlive(true);
 			currentRoundBoard.put(posAlive, aliveCell);
