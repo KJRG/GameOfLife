@@ -26,7 +26,8 @@ public class Board {
 		
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
-				currentRoundBoard.put(new Position(i, j), new Cell(i, j));
+				Cell c = new Cell(i, j);
+				currentRoundBoard.put(c.getPosition(), c);
 			}
 		}
 
@@ -34,7 +35,7 @@ public class Board {
 			Position posAlive = new Position(c.getX(), c.getY());
 			Cell aliveCell = currentRoundBoard.get(posAlive);
 			aliveCell.setAlive(true);
-			currentRoundBoard.put(posAlive, aliveCell);
+			currentRoundBoard.put(aliveCell.getPosition(), aliveCell);
 		}
 	}
 
@@ -88,12 +89,12 @@ public class Board {
 							&& !c.isAlive())) {
 
 				c.setAlive(false);
-				nextRoundBoard.put(new Position(pos), c);
+				nextRoundBoard.put(c.getPosition(), c);
 				continue;
 			}
 
 			c.setAlive(true);
-			nextRoundBoard.put(new Position(pos), c);
+			nextRoundBoard.put(c.getPosition(), c);
 		}
 
 		currentRoundBoard = nextRoundBoard;

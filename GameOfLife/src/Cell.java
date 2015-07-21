@@ -12,6 +12,10 @@ public class Cell {
 		this.alive = other.alive;
 	}
 
+	public Position getPosition() {
+		return position;
+	}
+
 	public int getX() {
 		return position.getX();
 	}
