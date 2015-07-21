@@ -21,10 +21,30 @@ public class Display implements ActionListener {
 		// TODO Move different figures to enum
 		
 		List<Cell> cells = new ArrayList<Cell>();
+		
+		// brick
 		cells.add(new Cell(0, 0));
 		cells.add(new Cell(0, 1));
 		cells.add(new Cell(1, 0));
-		board = new Board(3, 3, cells);
+
+		// brick
+		cells.add(new Cell(23, 23));
+		cells.add(new Cell(23, 24));
+		cells.add(new Cell(24, 23));
+
+		// blinker
+		cells.add(new Cell(4, 5));
+		cells.add(new Cell(5, 5));
+		cells.add(new Cell(6, 5));
+		
+		// glider
+		cells.add(new Cell(10, 10));
+		cells.add(new Cell(11, 11));
+		cells.add(new Cell(12, 11));
+		cells.add(new Cell(10, 12));
+		cells.add(new Cell(11, 12));
+		
+		board = new Board(30, 30, cells);
 		
 		prepareGUI();
 	}

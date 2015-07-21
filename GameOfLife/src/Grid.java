@@ -45,8 +45,6 @@ public class Grid extends JPanel {
 				
 				g.setColor(Color.BLACK);
 				g.drawRect((side * position.getX()), (side * position.getY()), side, side);
-				
-				continue;
 			}
 		}
 	}
