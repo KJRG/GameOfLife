@@ -34,7 +34,7 @@ public class Display implements ActionListener, MouseListener {
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
 		buttonNextRound = new JButton("Next round");
-		buttonClearBoard = new JButton("Clear");
+		buttonClearBoard = new JButton("Clear board");
 
 		buttonStart.setMaximumSize(new Dimension(Integer.MAX_VALUE,
 				buttonStart.getMinimumSize().height));
