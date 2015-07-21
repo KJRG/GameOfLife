@@ -42,7 +42,9 @@ public class Board {
 		List<Position> neighbours = new ArrayList<Position>();
 
 		int minLeft = pos.getX() == 0 ? 0 : pos.getX() - 1;
-		int maxRight = pos.getX() == (numOfRows - 1) ? (numOfRows - 1) : pos.getX() + 1;
+		int maxRight = pos.getX() == (numOfRows - 1)
+				? (numOfRows - 1)
+				: pos.getX() + 1;
 		int minUp = pos.getY() == 0 ? 0 : pos.getY() - 1;
 		int maxDown = pos.getY() == (numOfColumns - 1)
 				? (numOfColumns - 1)

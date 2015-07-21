@@ -27,7 +27,7 @@ public class Position {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -36,11 +36,11 @@ public class Position {
 		result = prime * result + y;
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
-			return true;			
+			return true;
 		}
 		if (obj == null || getClass() != obj.getClass()) {
 			return false;

@@ -14,18 +14,18 @@ public class Display implements ActionListener {
 			buttonStop,
 			buttonNextRound;
 	Grid grid;
-	
+
 	private Board board;
 
 	public Display() {
 		// TODO Move different figures to enum
-		
+
 		List<Cell> cells = new ArrayList<Cell>();
 		cells.add(new Cell(0, 0));
 		cells.add(new Cell(0, 1));
 		cells.add(new Cell(1, 0));
 		board = new Board(3, 3, cells);
-		
+
 		prepareGUI();
 	}
 
@@ -57,13 +57,13 @@ public class Display implements ActionListener {
 	private void show() {
 		mainFrame.setVisible(true);
 	}
-	
+
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == this.buttonNextRound) {
+		if (ae.getSource() == this.buttonNextRound) {
 			board.nextRound();
-			
+
 			grid.setBoard(board.getCurrentRound());
-			
+
 			grid.repaint();
 		}
 	}
