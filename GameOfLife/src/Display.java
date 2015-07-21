@@ -37,9 +37,11 @@ public class Display implements ActionListener {
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
 		buttonNextRound = new JButton("Next round");
+		
 		buttonStart.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonStart.getMinimumSize().height));
 		buttonStop.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonStop.getMinimumSize().height));
 		buttonNextRound.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonNextRound.getMinimumSize().height));
+		
 		buttonNextRound.addActionListener(this);
 
 		grid = new Grid();
@@ -63,9 +65,7 @@ public class Display implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == this.buttonNextRound) {
 			board.nextRound();
-			
 			grid.setBoard(board.getCurrentRound());
-			
 			grid.repaint();
 		}
 	}

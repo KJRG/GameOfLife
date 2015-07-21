@@ -6,8 +6,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 public class Grid extends JPanel {
-	private static final int boardX = 3, boardY = 3,
-			boardMaxX = 30, boardMaxY = 30, side = 10;
+	private static final int boardMaxX = 30, boardMaxY = 30, side = 10;
 	private Map<Position, Cell> board;
 
 	public Map<Position, Cell> getBoard() {
@@ -37,25 +36,17 @@ public class Grid extends JPanel {
 		if (board.isEmpty()) {
 			return;
 		}
-
-		for (int i = 0; i < boardX; i++) {
-			for (int j = 0; j < boardY; j++) {
-
-				if (board.get(new Position(i, j)).isAlive()) {
-					g.setColor(Color.GREEN);
-					g.fillRect((side * i), (side * j), side, side);
-
-					g.setColor(Color.BLACK);
-					g.drawRect((side * i), (side * j), side, side);
-
-					continue;
-				}
-
-				g.setColor(Color.WHITE);
-				g.fillRect((side * i), (side * j), side, side);
-
+		
+		for(Position position : board.keySet()) {
+			
+			if (board.get(position).isAlive()) {
+				g.setColor(Color.GREEN);
+				g.fillRect((side * position.getX()), (side * position.getY()), side, side);
+				
 				g.setColor(Color.BLACK);
-				g.drawRect((side * i), (side * j), side, side);
+				g.drawRect((side * position.getX()), (side * position.getY()), side, side);
+				
+				continue;
 			}
 		}
 	}
