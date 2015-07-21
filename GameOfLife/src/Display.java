@@ -9,61 +9,63 @@ import java.util.ArrayList;
 
 public class Display implements ActionListener {
 	JFrame mainFrame;
-	JPanel controlPanel;
+	JPanel buttonsPanel;
 	JButton buttonStart,
 			buttonStop,
 			buttonNextRound;
 	Grid grid;
-
+	
 	private Board board;
 
 	public Display() {
 		// TODO Move different figures to enum
-
+		
 		List<Cell> cells = new ArrayList<Cell>();
 		cells.add(new Cell(0, 0));
 		cells.add(new Cell(0, 1));
 		cells.add(new Cell(1, 0));
 		board = new Board(3, 3, cells);
-
+		
 		prepareGUI();
 	}
 
 	public void prepareGUI() {
 		mainFrame = new JFrame("Game of life");
-		mainFrame.setSize(500, 350);
+		mainFrame.setSize(450, 350);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
 		buttonNextRound = new JButton("Next round");
-		buttonStart.setPreferredSize(new Dimension(100, 26));
-		buttonStop.setPreferredSize(new Dimension(100, 26));
-		buttonNextRound.setPreferredSize(new Dimension(100, 26));
+		buttonStart.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonStart.getMinimumSize().height));
+		buttonStop.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonStop.getMinimumSize().height));
+		buttonNextRound.setMaximumSize(new Dimension(Integer.MAX_VALUE, buttonNextRound.getMinimumSize().height));
 		buttonNextRound.addActionListener(this);
-
-		controlPanel = new JPanel();
-		controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
-		controlPanel.add(buttonStart);
-		controlPanel.add(buttonStop);
-		controlPanel.add(buttonNextRound);
 
 		grid = new Grid();
 
+		buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.PAGE_AXIS));
+		buttonsPanel.add(buttonStart);
+		buttonsPanel.add(Box.createVerticalStrut(2));
+		buttonsPanel.add(buttonStop);
+		buttonsPanel.add(Box.createVerticalStrut(2));
+		buttonsPanel.add(buttonNextRound);
+
 		mainFrame.add(grid, BorderLayout.CENTER);
-		mainFrame.add(controlPanel, BorderLayout.EAST);
+		mainFrame.add(buttonsPanel, BorderLayout.EAST);
 	}
 
 	private void show() {
 		mainFrame.setVisible(true);
 	}
-
+	
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == this.buttonNextRound) {
+		if(ae.getSource() == this.buttonNextRound) {
 			board.nextRound();
-
+			
 			grid.setBoard(board.getCurrentRound());
-
+			
 			grid.repaint();
 		}
 	}
