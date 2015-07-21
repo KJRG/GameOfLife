@@ -7,11 +7,11 @@ public class Board {
 	private int numOfRows, numOfColumns;
 	private Map<Position, Cell> currentRoundBoard;
 
-	public int getRows() {
+	public int getNumOfRows() {
 		return numOfRows;
 	}
 
-	public int getColumns() {
+	public int getNumOfColumns() {
 		return numOfColumns;
 	}
 
@@ -23,7 +23,7 @@ public class Board {
 		this.numOfRows = rows;
 		this.numOfColumns = columns;
 		this.currentRoundBoard = new HashMap<Position, Cell>();
-
+		
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
 				currentRoundBoard.put(new Position(i, j), new Cell(i, j));
@@ -78,7 +78,7 @@ public class Board {
 	public void nextRound() {
 		int numAliveNeighbours = 0;
 		Map<Position, Cell> nextRoundBoard = new HashMap<Position, Cell>();
-
+		
 		for (Position pos : currentRoundBoard.keySet()) {
 			Cell c = new Cell(currentRoundBoard.get(pos));
 			numAliveNeighbours = getNumAliveNeighbours(pos);
