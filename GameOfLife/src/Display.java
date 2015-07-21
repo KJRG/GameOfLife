@@ -4,9 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Display implements ActionListener {
+public class Display implements ActionListener, MouseListener {
 	private JFrame mainFrame;
 	private JPanel buttonsPanel;
 	private JButton buttonStart,
@@ -46,6 +47,7 @@ public class Display implements ActionListener {
 
 		grid = new GridPanel();
 		grid.setBoard(this.board.getCurrentRound());
+		grid.addMouseListener(this);
 
 		buttonsPanel = new JPanel();
 		buttonsPanel
@@ -101,5 +103,40 @@ public class Display implements ActionListener {
 			grid.setBoard(board.getCurrentRound());
 			grid.repaint();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if(animate) {
+			return;
+		}
+		
+		int row = e.getY() / 10;
+		int column = e.getX() / 10;
+		toggleCell(new Position(column, row));
+	}
+	
+	private void toggleCell(Position position) {
+		Cell cell = this.board.getCurrentRound().get(position);
+		cell.setAlive(!cell.isAlive());
+		this.board.updateCell(cell);
+		
+		grid.repaint();
 	}
 }

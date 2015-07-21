@@ -75,6 +75,14 @@ public class Board {
 
 		return numAliveNeighbours;
 	}
+	
+	public void updateCell(Cell cell) {
+		if(cell.getX() >= this.getNumOfColumns() || cell.getY() >= this.numOfRows) {
+			return;
+		}
+		
+		this.currentRoundBoard.put(cell.getPosition(), cell);
+	}
 
 	public void nextRound() {
 		int numAliveNeighbours = 0;
