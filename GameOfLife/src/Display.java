@@ -13,7 +13,7 @@ public class Display implements ActionListener {
 	private JButton buttonStart,
 			buttonStop,
 			buttonNextRound;
-	private Grid grid;
+	private GridPanel grid;
 
 	private Board board;
 	private boolean loop;
@@ -97,7 +97,7 @@ public class Display implements ActionListener {
 		buttonStop.addActionListener(this);
 		buttonNextRound.addActionListener(this);
 
-		grid = new Grid();
+		grid = new GridPanel();
 		grid.setBoard(this.board.getCurrentRound());
 
 		buttonsPanel = new JPanel();
