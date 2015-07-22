@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+import org.junit.Ignore;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -9,20 +11,23 @@ import java.awt.event.MouseListener;
 
 public class Display implements ActionListener, MouseListener {
 	private JFrame mainFrame;
+	private GridPanel grid;
 	private JPanel buttonsPanel;
 	private JButton buttonStart,
 			buttonStop,
 			buttonNextRound,
 			buttonClearBoard;
-	private GridPanel grid;
+	private JLabel generationsLabel;
 
 	private Board board;
 	private boolean animate;
 	private Thread animatorThread;
+	private int numOfGenerations;
 
 	public Display(Board board) {
 		this.board = board;
-		animate = false;
+		this.animate = false;
+		this.numOfGenerations = 0;
 		prepareGUI();
 	}
 
@@ -30,6 +35,10 @@ public class Display implements ActionListener, MouseListener {
 		mainFrame = new JFrame("Game of life");
 		mainFrame.setSize(800, 600);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		grid = new GridPanel(board.getNumOfRows(), board.getNumOfColumns());
+		grid.setBoard(this.board.getCurrentRound());
+		grid.addMouseListener(this);
 
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
@@ -50,9 +59,7 @@ public class Display implements ActionListener, MouseListener {
 		buttonNextRound.addActionListener(this);
 		buttonClearBoard.addActionListener(this);
 
-		grid = new GridPanel(board.getNumOfRows(), board.getNumOfColumns());
-		grid.setBoard(this.board.getCurrentRound());
-		grid.addMouseListener(this);
+		generationsLabel = new JLabel("Generation " + numOfGenerations);
 
 		buttonsPanel = new JPanel();
 		buttonsPanel
@@ -64,6 +71,8 @@ public class Display implements ActionListener, MouseListener {
 		buttonsPanel.add(buttonNextRound);
 		buttonsPanel.add(Box.createVerticalStrut(2));
 		buttonsPanel.add(buttonClearBoard);
+		buttonsPanel.add(Box.createVerticalStrut(2));
+		buttonsPanel.add(generationsLabel);
 
 		mainFrame.add(grid, BorderLayout.CENTER);
 		mainFrame.add(buttonsPanel, BorderLayout.EAST);
@@ -81,7 +90,9 @@ public class Display implements ActionListener, MouseListener {
 			while (animate) {
 				board.nextRound();
 				grid.setBoard(board.getCurrentRound());
+				numOfGenerations++;
 				grid.repaint();
+				generationsLabel.setText("Generation " + numOfGenerations);
 
 				try {
 					Thread.sleep(250);
@@ -107,13 +118,17 @@ public class Display implements ActionListener, MouseListener {
 
 		if (ae.getSource() == this.buttonNextRound && !animate) {
 			board.nextRound();
+			numOfGenerations++;
 			grid.setBoard(board.getCurrentRound());
 			grid.repaint();
+			generationsLabel.setText("Generation " + numOfGenerations);
 		}
 		
 		if(ae.getSource() == this.buttonClearBoard && !animate) {
 			board.clear();
+			this.numOfGenerations = 0;
 			grid.repaint();
+			generationsLabel.setText("Generation " + numOfGenerations);
 		}
 	}
 
@@ -147,13 +162,15 @@ public class Display implements ActionListener, MouseListener {
 		}
 		
 		toggleCell(new Position(column, row));
+		numOfGenerations = 0;
+		
+		grid.repaint();
+		generationsLabel.setText("Generation " + numOfGenerations);
 	}
 	
 	private void toggleCell(Position position) {
 		Cell cell = this.board.getCurrentRound().get(position);
 		cell.setAlive(!cell.isAlive());
 		this.board.updateCell(cell);
-		
-		grid.repaint();
 	}
 }
