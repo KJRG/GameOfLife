@@ -6,7 +6,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 public class GridPanel extends JPanel {
-	private int boardMaxX = 50, boardMaxY = 50, side = 10;
+	private int boardMaxX, boardMaxY, side = 10;
 	private Map<Position, Cell> board;
 
 	public Map<Position, Cell> getBoard() {
