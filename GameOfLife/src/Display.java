@@ -33,7 +33,7 @@ public class Display implements ActionListener, MouseListener {
 
 	public void prepareGUI() {
 		mainFrame = new JFrame("Game of life");
-		mainFrame.setSize(800, 600);
+		mainFrame.setSize(800, 650);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		grid = new GridPanel(board.getNumOfRows(), board.getNumOfColumns());
