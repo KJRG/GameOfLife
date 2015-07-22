@@ -52,7 +52,7 @@ public class Controller {
 		cells.add(new Cell(5, 23));
 		cells.add(new Cell(6, 21));
 		
-		Board board = new Board(30, 30, cells);
+		Board board = new Board(50, 51, cells);
 		
 		Display d = new Display(board);
 		d.show();

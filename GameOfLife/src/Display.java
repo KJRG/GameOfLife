@@ -28,7 +28,7 @@ public class Display implements ActionListener, MouseListener {
 
 	public void prepareGUI() {
 		mainFrame = new JFrame("Game of life");
-		mainFrame.setSize(450, 350);
+		mainFrame.setSize(800, 600);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		buttonStart = new JButton("Start");
@@ -50,7 +50,7 @@ public class Display implements ActionListener, MouseListener {
 		buttonNextRound.addActionListener(this);
 		buttonClearBoard.addActionListener(this);
 
-		grid = new GridPanel();
+		grid = new GridPanel(board.getNumOfRows(), board.getNumOfColumns());
 		grid.setBoard(this.board.getCurrentRound());
 		grid.addMouseListener(this);
 
@@ -141,6 +141,11 @@ public class Display implements ActionListener, MouseListener {
 		
 		int row = e.getY() / 10;
 		int column = e.getX() / 10;
+		
+		if(row >= board.getNumOfRows() || column >= board.getNumOfColumns()) {
+			return;
+		}
+		
 		toggleCell(new Position(column, row));
 	}
 	

@@ -43,12 +43,12 @@ public class Board {
 		List<Position> neighbours = new ArrayList<Position>();
 
 		int minLeft = position.getX() == 0 ? 0 : position.getX() - 1;
-		int maxRight = position.getX() == (numOfRows - 1)
-				? (numOfRows - 1)
+		int maxRight = position.getX() == (numOfColumns - 1)
+				? (numOfColumns - 1)
 				: position.getX() + 1;
 		int minUp = position.getY() == 0 ? 0 : position.getY() - 1;
-		int maxDown = position.getY() == (numOfColumns - 1)
-				? (numOfColumns - 1)
+		int maxDown = position.getY() == (numOfRows - 1)
+				? (numOfRows - 1)
 				: position.getY() + 1;
 
 		for (int i = minLeft; i <= maxRight; i++) {
@@ -72,7 +72,7 @@ public class Board {
 				numAliveNeighbours++;
 			}
 		}
-
+		
 		return numAliveNeighbours;
 	}
 	
@@ -99,7 +99,7 @@ public class Board {
 		for (Position position : currentRoundBoard.keySet()) {
 			Cell cell = new Cell(currentRoundBoard.get(position));
 			numAliveNeighbours = getNumAliveNeighbours(cell);
-
+			
 			if (numAliveNeighbours < 2 || numAliveNeighbours > 3
 					|| (numAliveNeighbours == 2
 							&& !cell.isAlive())) {
@@ -111,6 +111,7 @@ public class Board {
 
 			cell.setAlive(true);
 			nextRoundBoard.put(cell.getPosition(), cell);
+			
 		}
 
 		currentRoundBoard = nextRoundBoard;

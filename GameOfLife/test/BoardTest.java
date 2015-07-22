@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class BoardTest {
@@ -10,7 +11,7 @@ public class BoardTest {
 	@Test
 	public void cellDiesWhenItHasNoNeighbours() {
 		List<Cell> aliveCells = Arrays.asList((new Cell(0, 0)));
-		Board board = new Board(3, 3, aliveCells);
+		Board board = new Board(3, 4, aliveCells);
 		boolean alive = false;
 
 		board.nextRound();
