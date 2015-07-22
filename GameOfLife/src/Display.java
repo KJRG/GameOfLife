@@ -18,6 +18,7 @@ public class Display implements ActionListener, MouseListener {
 			buttonNextRound,
 			buttonClearBoard;
 	private JLabel generationsLabel;
+	private JScrollPane scrollPane;
 
 	private Board board;
 	private boolean animate;
@@ -35,10 +36,13 @@ public class Display implements ActionListener, MouseListener {
 		mainFrame = new JFrame("Game of life");
 		mainFrame.setSize(800, 650);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 		grid = new GridPanel(board.getNumOfRows(), board.getNumOfColumns());
+		grid.setPreferredSize(new Dimension(600, 600));
 		grid.setBoard(this.board.getCurrentRound());
 		grid.addMouseListener(this);
+
+		scrollPane = new JScrollPane(grid);
 
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
@@ -74,7 +78,7 @@ public class Display implements ActionListener, MouseListener {
 		buttonsPanel.add(Box.createVerticalStrut(2));
 		buttonsPanel.add(generationsLabel);
 
-		mainFrame.add(grid, BorderLayout.CENTER);
+		mainFrame.add(scrollPane, BorderLayout.CENTER);
 		mainFrame.add(buttonsPanel, BorderLayout.EAST);
 	}
 
@@ -123,8 +127,8 @@ public class Display implements ActionListener, MouseListener {
 			grid.repaint();
 			generationsLabel.setText("Generation " + numOfGenerations);
 		}
-		
-		if(ae.getSource() == this.buttonClearBoard && !animate) {
+
+		if (ae.getSource() == this.buttonClearBoard && !animate) {
 			board.clear();
 			this.numOfGenerations = 0;
 			grid.repaint();
@@ -150,24 +154,24 @@ public class Display implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(animate || e.getButton() != MouseEvent.BUTTON1) {
+		if (animate || e.getButton() != MouseEvent.BUTTON1) {
 			return;
 		}
-		
+
 		int row = e.getY() / 10;
 		int column = e.getX() / 10;
-		
-		if(row >= board.getNumOfRows() || column >= board.getNumOfColumns()) {
+
+		if (row >= board.getNumOfRows() || column >= board.getNumOfColumns()) {
 			return;
 		}
-		
+
 		toggleCell(new Position(column, row));
 		numOfGenerations = 0;
-		
+
 		grid.repaint();
 		generationsLabel.setText("Generation " + numOfGenerations);
 	}
-	
+
 	private void toggleCell(Position position) {
 		Cell cell = this.board.getCurrentRound().get(position);
 		cell.setAlive(!cell.isAlive());
