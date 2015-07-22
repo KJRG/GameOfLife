@@ -1,7 +1,5 @@
 import javax.swing.*;
 
-import org.junit.Ignore;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -34,15 +32,19 @@ public class Display implements ActionListener, MouseListener {
 
 	public void prepareGUI() {
 		mainFrame = new JFrame("Game of life");
-		mainFrame.setSize(800, 650);
+		mainFrame.setSize(750, 670);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		grid = new GridPanel(board.getNumOfRows(), board.getNumOfColumns());
 		grid.setPreferredSize(new Dimension(600, 600));
 		grid.setBoard(this.board.getCurrentRound());
 		grid.addMouseListener(this);
 
 		scrollPane = new JScrollPane(grid);
+		scrollPane.setHorizontalScrollBarPolicy(
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		buttonStart = new JButton("Start");
 		buttonStop = new JButton("Stop");
