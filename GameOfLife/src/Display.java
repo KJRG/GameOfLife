@@ -17,15 +17,17 @@ public class Display implements ActionListener, MouseListener {
 			buttonClearBoard;
 	private JLabel generationsLabel;
 	private JScrollPane scrollPane;
+	private JCheckBox drawingCheckBox;
 
 	private Board board;
-	private boolean animate;
+	private boolean animate, draw;
 	private Thread animatorThread;
 	private int numOfGenerations;
 
 	public Display(Board board) {
 		this.board = board;
 		this.animate = false;
+		this.draw = false;
 		this.numOfGenerations = 0;
 		prepareGUI();
 	}
@@ -66,6 +68,8 @@ public class Display implements ActionListener, MouseListener {
 		buttonClearBoard.addActionListener(this);
 
 		generationsLabel = new JLabel("Generation " + numOfGenerations);
+		
+		drawingCheckBox = new JCheckBox("Drawing");
 
 		buttonsPanel = new JPanel();
 		buttonsPanel
@@ -79,6 +83,8 @@ public class Display implements ActionListener, MouseListener {
 		buttonsPanel.add(buttonClearBoard);
 		buttonsPanel.add(Box.createVerticalStrut(2));
 		buttonsPanel.add(generationsLabel);
+		buttonsPanel.add(Box.createVerticalStrut(2));
+		buttonsPanel.add(drawingCheckBox);
 
 		mainFrame.add(scrollPane, BorderLayout.CENTER);
 		mainFrame.add(buttonsPanel, BorderLayout.EAST);
@@ -135,6 +141,10 @@ public class Display implements ActionListener, MouseListener {
 			this.numOfGenerations = 0;
 			grid.repaint();
 			generationsLabel.setText("Generation " + numOfGenerations);
+		}
+		
+		if(ae.getSource() == this.drawingCheckBox) {
+			draw = drawingCheckBox.isSelected();
 		}
 	}
 
